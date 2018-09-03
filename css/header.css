@@ -1,5 +1,9 @@
 body{
     padding: 0px;
+    color: #717171;
+    font-family: Malgun Gothic,"맑은 고딕",AppleGothic,Dotum,"돋움",sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
   }
   .head-wrap{
     background: url(../images/top_bg.jpg);
