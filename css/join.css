@@ -144,3 +144,6 @@ div.btn-group{
     height: 55px;
 }
 
+span.danger{
+    color: red;
+}
