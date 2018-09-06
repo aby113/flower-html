@@ -147,3 +147,8 @@ div.btn-group{
 span.danger{
     color: red;
 }
+
+.errorMessage{
+    color:red;
+  }
+  

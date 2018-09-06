@@ -22,10 +22,13 @@ body{
     vertical-align: bottom;
     list-style-type:none;
   }
+
+  .top-link li{
+    float: right;
+  }
   
   .top-link a{
-    float: right;
-    display: inline-block;
+      display: inline-block;
       color: #b6b3b3;
       font-family: '돋움', dotum, sans-serif;
       font-size: 11px;

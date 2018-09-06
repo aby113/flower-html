@@ -1,20 +1,34 @@
-
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
     <header>
 
         <!-- Navigation -->
         <nav class="head-wrap">
             <div class="top-link-wrap">
                 <ul class="top-link">
-                    <li><a href="login.html">로그인</a></li>
-                    <li><a href="join-agreement.html">회원가입</a></li>
-                    <li><a href="">마이페이지</a></li>
-                    <li><a href="cart.html">장바구니</a></li>
                     <li><a href="">고객센터</a></li>
+                    <li><a href="cart.html">장바구니</a></li>
+                    <li><a href="">마이페이지</a></li>
+                    <li><a href="joi    n-agreement.php">회원가입</a></li>
+                    <li>
+<?php
+if(empty($_SESSION["login"])){
+    echo "<a href='login.php'>로그인</a>";
+}else{
+    echo "<a class='logout' href='#'>로그아웃</a>";
+}
+?>
+                    </li>
                 </ul>
             </div>
             <div class="container text-center">
                 <h1>
-                    <img src="images/logo.png" alt="">
+                   <a href="/">
+                             <img src="images/logo.png" alt="">
+                    </a>
                 </h1>
 
             </div>
@@ -37,4 +51,27 @@
         </nav>
     </header>
     <!-- 헤더끝 -->
+    <script>
+    $(document).ready(function () {
+        $(".logout").click(function (e) { 
+            e.preventDefault();
+            var result = confirm("로그아웃 하시겠습니까?");
+            if(!result)return;
+            $.ajax({
+                type: "post",
+                url: "login.php",
+                data: {logout:"true"},
+                dataType: "text",
+                success: function (response) {
+                    location.reload();
+                }
+            });
+        });
+
+
+
+    });
     
+    
+    
+    </script>

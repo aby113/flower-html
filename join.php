@@ -1,3 +1,11 @@
+<?php
+include "include/config.php";
+include "include/classes/Constants.php";
+include "include/classes/Account.php";
+include "include/handlers/join-handler.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,32 +58,39 @@
                 <div class="title">
                     <h3>기본정보</h3>
                     <p><img src="images/squre-red.png" alt=""> 표시는 반드시 입력하셔야 하는 항목입니다.</p>
+
                 </div>
                 <form action="<?=$_SERVER['PHP_SELF']?>" method="post">
+                    <input type="hidden" name="email" id="email" value="">
                     <table>
                         <tr>
                             <th><img src="images/squre-red.png" alt=""> 아이디</th>
                             <td class="required">
-                                <input type="text" name="id" id="" required>
+                                <input type="text" name="id" id="" placeholder="※ 영문자, 숫자, _ 만 입력 가능. 최소 3자이상 입력하세요."
+                                   value="<?=rememberInpVal('id')?>" required>
+                                <?=$account->getError(Constants::$idCharacters); ?>
+                                <?=$account->getError(Constants::$idTaken); ?>
                             </td>
                         </tr>
                         <tr>
                             <th><img src="images/squre-red.png" alt="">비밀번호</th>
                             <td class="required">
-                                <input type="text" name="pw" id="" required placeholder="영문대/소문자, 숫자, 특수문자 중 2가지 이상 조합하세요">
+                                <input type="text" name="pw" id="" value="<?=rememberInpVal('pw')?>" required placeholder="5이상 30자 이하로 입력해주세요.">
+                                <?=$account->getError(Constants::$passwordCharacters)?>
                             </td>
                         </tr>
                         <tr>
                             <th><img src="images/squre-red.png" alt="">비밀번호확인</th>
                             <td class="required">
-                                <input type="text" name="pwConfirm" id="" required>
+                                <input type="text" name="pwConfirm" id="" value="<?=rememberInpVal('pwConfirm')?>" required>
+                                <?=$account->getError(Constants::$passwordsDoNoMatch)?>
                             </td>
                         </tr>
                         <tr>
                             <th>이메일</th>
                             <td>
-                                <input type="text" name="email1" id="">
-                                <select name="email2" id="">
+                                <input type="text" name="email1" id="email1" value="<?=rememberInpVal('email1')?>">
+                                <select name="email2" id="email2" value="<?=rememberInpVal('email2')?>">
                                     <option value="naver.com">naver.com</option>
                                     <option value="daum.net">daum.net</option>
                                     <option value="nate.com">nate.com</option>
@@ -88,11 +103,14 @@
                                         정보/이벤트 메일 수신에 동의합니다.
                                     </label>
                                 </p>
+                                <?=$account->getError(Constants::$emailInvalid)?>
+                                <?=$account->getError(Constants::$emailsDoNotMatch)?>
+                                <?=$account->getError(Constants::$emailTaken)?>
                             </td>
                         </tr>
                         <tr>
                             <th>휴대폰번호</th>
-                            <td><input type="text" placeholder="- 없이 입력하세요.">
+                            <td><input type="text" name="ph" id="ph" placeholder="- 없이 입력하세요." value="<?=rememberInpVal('ph')?>">
                                 <p>
                                     <input type="checkbox" name="sms" id="sms">
                                     <label for="sms">
@@ -103,7 +121,7 @@
                         </tr>
                         <tr>
                             <th>전화번호</th>
-                            <td><input type="text" placeholder="- 없이 입력하세요."></td>
+                            <td><input type="text" name="hp" id="hp" placeholder="- 없이 입력하세요." value="<?=rememberInpVal('hp')?>"></td>
                         </tr>
                         <tr>
                             <th>주소</th>
@@ -134,28 +152,22 @@
         </article>
         <script>
             $(document).ready(function () {
-
-                $("input[name=id]").after("<span class='id danger'></span>");
-                $("input[name=pwConfirm]").after("<span class='pw danger'></span>");
-                $("input[name=email1]").parent().append("<span class='email danger'></span>");
+                // 경고메세지 span태그 생성
+                var reqPath = '<?= $_SERVER['PHP_SELF'] ?>';
+                console.log(reqPath);
+                spanInit();
+                var isVaild = 0;
                 $(".searchBtn").click(function (e) {
                     e.preventDefault();
                     execDaumPostcode();
                 });
 
                 $("input[name=id]").change(function () {
-                     $id = $("input[name=id]").val();
-                    // $success = function (result) {
-                    //     console.log(result);
-                    //     if (result == true) {
-                    //         $(".id.danger").text("이미 존재하는 아이디입니다.");
-                    //     }
-                    // };
-                    // sendPostAjax({valid:"id", id:$id, func:$success});
+                    $id = $("input[name=id]").val();
 
                     $.ajax({
                         type: "post",
-                        url: "include/handlers/join-handler.php?vaild=id",
+                        url: reqPath + "?vaild=id",
                         data: {
                             "id": $id
                         },
@@ -175,6 +187,8 @@
                     var pwConfirm = $(this).val();
                     if (pw !== pwConfirm) {
                         $(".pw.danger").text("비밀번호가 서로 다릅니다.");
+                    } else {
+                        $(".pw.danger").text("");
                     }
 
                 });
@@ -182,8 +196,8 @@
                 $("input[name=email1]").change(function () {
                     var regExp =
                         /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-                    var email2 = $("select").val();
                     var email1 = $("input[name=email1]").val();
+                    var email2 = $("#email2").val();
                     var email = email1 + "@" + email2;
                     console.log(email);
                     if (email.match(regExp) == null) {
@@ -193,31 +207,83 @@
                     }
 
 
-                });
-
-                // vaild=id, data, success
-                function sendPostAjax(obj) {
-                    // 키값들을 가져와서 데이터 키를 찾아냄
-                    var keyArr = Object.keys(obj);
-                    var key = keyArr[1];
-
                     $.ajax({
                         type: "post",
-                        url: "include/handlers/join-handler.php?vaild=" + obj.vaild,
+                        url: reqPath + "?vaild=email",
                         data: {
-                            key: obj[key]
+                            "email": email
                         },
                         dataType: "text",
-                        success: function(result){
-                            
+                        success: function (result) {
+                            console.log(result);
+                            if (result == true) {
+                                $(".email.danger").text("이미 존재하는 이메일입니다.");
+                            }
                         }
                     });
 
+
+
+                });
+
+
+                $("#email2").change(function (e) {
+                    $("#email1").trigger("change");
+                });
+
+
+                $("#hp").change(function (e) {
+                    e.preventDefault();
+                    var val = $(this).val();
+                    var result = val.replace(/-/gi, '');
+                    $("#hp").val(result);
+                    vaildNum($(".hp.danger"), result);
+                });
+
+                $("#ph").change(function (e) {
+                    e.preventDefault();
+                    var val = $("#ph").val();
+                    var result = val.replace(/-/gi, '');
+                    $("#ph").val(result);
+                    vaildNum($(".ph.danger"), result);
+                });
+
+                $("#postcode").click(function () {
+                    $(".searchBtn").trigger("click");
+                });
+
+                $("#address").click(function (e) {
+                    e.preventDefault();
+                    $(".searchBtn").trigger("click");
+                });
+
+
+                $("form").submit(function (e) {
+                    var email1 = $("#email1").val();
+                    var email2 = $("#email2").val();
+                    var email = email1 + "@" + email2;
+                    $("#email").val(email);
+
+                });
+
+                // 경고메세지 span태그 생성
+                function spanInit() {
+
+                    $("input[name=id]").after("<span class='id danger'></span>");
+                    $("input[name=pwConfirm]").after("<span class='pw danger'></span>");
+                    $("input[name=email1]").parent().append("<span class='email danger'></span>");
+                    $("#ph").after("<span class='ph danger'></span>");
+                    $("#hp").after("<span class='hp danger'></span>");
                 }
 
-
-
-
+                function vaildNum($target, result) {
+                    var regex = /[^0-9]/g;
+                    if (regex.test(result)) {
+                        $target.text("숫자만 입력하세요.");
+                    } else {
+                        $target.text("");
+                    }
+                }
 
 
 

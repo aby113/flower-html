@@ -1,3 +1,6 @@
+<?php
+// session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +13,8 @@
     <link rel="shortcut icon" type="image⁄x-icon" href="images/title-logo.png">
 
     <title>꽃잎마을</title>
-
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -19,46 +23,18 @@
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/index.css">
 
+<style>
+.carousel-inner{
+    position: relative;
+    bottom: 20px;
+}
+</style>
 </head>
 
   <body>
-<header>
-
-  <!-- Navigation -->
-  <nav class="head-wrap">
-    <div class="top-link-wrap">
-      <ul class="top-link">
-        <li><a href="login.html">로그인</a></li>
-        <li><a href="join-agreement.html">회원가입</a></li>
-        <li><a href="">마이페이지</a></li>
-        <li><a href="cart.html">장바구니</a></li>
-        <li><a href="">고객센터</a></li>
-      </ul>
-    </div>
-    <div class="container text-center">
-      <h1>
-        <img src="images/logo.png" alt="">
-      </h1>
-      
-    </div>
-    <div class="top-service">
-      <div class="container">
-        <ul>
-          <li><a href="goods-list.html">꽃바구니</a></li>
-          <li><a href="goods-list.html">근조화환</a></li>
-          <li><a href="goods-list.html">관엽/화분</a></li>
-          <li><a href="goods-list.html">동양란</a></li>
-          <li><a href="goods-list.html">축하화환</a></li>
-          <li><a href="goods-list.html">서양란</a></li>
-          <li><a href="goods-list.html">꽃다발/꽃상자</a></li>
-          <li><a href="goods-list.html">공기정화식물</a></li>
-          <li><a href="goods-list.html">분재</a></li>
-        </ul>
-      </div>
-
-    </div>
-  </nav>
-</header>
+  <?php
+  include "header.php";
+  ?>
 <section>
 
   <!-- 헤더끝 -->

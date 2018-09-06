@@ -1,3 +1,11 @@
+<?php
+include "include/config.php";
+include "include/classes/Utils.php";
+include "include/classes/Constants.php";
+include "include/classes/Account.php";
+include "include/handlers/login-handler.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,46 +26,14 @@
     <link href="css/business-frontpage.css" rel="stylesheet">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/login.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <header>
-
-        <!-- Navigation -->
-        <nav class="head-wrap">
-            <div class="top-link-wrap">
-                <ul class="top-link">
-                    <li><a href="">로그인</a></li>
-                    <li><a href="">회원가입</a></li>
-                    <li><a href="">마이페이지</a></li>
-                    <li><a href="">장바구니</a></li>
-                    <li><a href="">고객센터</a></li>
-                </ul>
-            </div>
-            <div class="container text-center">
-                <h1>
-                    <img src="images/logo.png" alt="">
-                </h1>
-
-            </div>
-            <div class="top-service">
-                <div class="container">
-                    <ul>
-                        <li><a href="#">꽃바구니</a></li>
-                        <li><a href="#">근조화환</a></li>
-                        <li><a href="#">관엽/화분</a></li>
-                        <li><a href="#">동양란</a></li>
-                        <li><a href="#">축하화환</a></li>
-                        <li><a href="#">서양란</a></li>
-                        <li><a href="#">꽃다발/꽃상자</a></li>
-                        <li><a href="#">공기정화식물</a></li>
-                        <li><a href="#">분재</a></li>
-                    </ul>
-                </div>
-
-            </div>
-        </nav>
-    </header>
+   <?php
+   include "header.php";
+   ?>
     <!-- 헤더끝 -->
     <section class="container">
         <header>
@@ -68,19 +44,17 @@
         <article>
             <h3>회원 로그인</h3>
             <div class="contents">
-                <form action="">
+                <form action="<?=$_SERVER['PHP_SELF']?>" method="POST">
                     <div class="login">
                         <div class="input-info">
-                            <div class="form-group">
-                                <input class="form-control" type="text" name="" id="">
-
+                            <div class="form-group">    
+                                <input class="form-control" type="text" name="id" id="id"  placeholder="아이디">
                             </div>
                            <div class="form-group">
-                                <input class="form-control"  type="text" name="" id="">
-
+                                <input class="form-control"  type="text" name="pw" id="pw" placeholder="비밀번호">
                             </div>
                         </div>
-                        <button class="btn btn-danger loginBtn">로그인</button>
+                        <button type="submit" class="btn btn-danger loginBtn" name="loginBtn">로그인</button>
                         <div class="clear"></div>
                     </div>
                     <div class="save">
@@ -100,7 +74,24 @@
 
 
     </section>
+    <script>
+    $(document).ready(function () {
+        
+        var isLoginFail = "<?= empty($account->errorArr); ?>";
+        var msg = "<?= Constants::$loginFailed ?>";
+        console.log(isLoginFail);
+        // if(isLoginFail != null){
+        //     alert(msg);
+        // }
 
+
+
+    });
+    
+    
+    
+    
+    </script>
 
 </body>
 

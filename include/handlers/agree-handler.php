@@ -12,5 +12,6 @@ try {
 
     $rows = $con->query("SELECT * FROM agreement");
     $result = $rows->fetchAll();
-
+    $agr_use = $result['0']['agr_cont'];
+    $privacy = $result['1']['agr_cont'];
 ?>
