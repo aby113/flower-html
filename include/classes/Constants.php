@@ -9,7 +9,7 @@ class Constants {
 	public static $emailTaken = "이미 등록된 이메일 입니다.";
 	public static $idCharacters = "※ 영문자, 숫자, _ 만 입력 가능. 최소 3자이상 입력하세요.";
 	public static $idTaken = "이미 존재하는 아이디 입니다.";
-
 	public static $loginFailed = "아이디 또는 비밀번호가 일치하지않습니다.";
+	public static $REGISTRATION_DATE = "pno";
 }
 ?>

@@ -1,5 +1,8 @@
 <?php
-// session_start();
+include "include/config.php";
+include "include/classes/ProductDAO.php";
+include "include/handlers/index-handler.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,111 +95,43 @@
       <h2>Category BEST <span class="h2-category" role="tablist">카테고리별 베스트 상품</span></h2>
       <ul class="nav nav-tabs cate-list">
         <!-- <li class="nav-item"><a class="nav-link" href="#">꽃다발/꽃상자</a></li> -->
-        <li class="nav-item"><a class="nav-link"  href="#">축하화환</a></li>
-        <li class="nav-item"><a class="nav-link"  href="#">서양란</a></li>
-        <li class="nav-item"><a class="nav-link"  href="#">동양란</a></li>
-        <li class="nav-item"><a class="nav-link"  href="#">관엽/화분</a></li>
-        <li class="nav-item"><a class="nav-link"  href="#">근조화환</a></li>
-        <li class="nav-item"><a class="nav-link"  href="#">꽃바구니</a></li>
+        <li class="nav-item" data-cno="5"><a class="nav-link"  href="#">축하화환</a></li>
+        <li class="nav-item" data-cno="6"><a class="nav-link"  href="#">서양란</a></li>
+        <li class="nav-item" data-cno="4"><a class="nav-link"  href="#">동양란</a></li>
+        <li class="nav-item" data-cno="3"><a class="nav-link"  href="#">관엽/화분</a></li>
+        <li class="nav-item" data-cno="2"><a class="nav-link"  href="#">근조화환</a></li>
+        <li class="nav-item" data-cno="1"><a class="nav-link"  href="#">꽃바구니</a></li>
       </ul>
       <div class="clear"></div>
     </div>
     <!-- 메인박스 카테고리끝 -->
     <hr>
     <!-- 상품리스트 -->
-    <div class="row text-center">
+    <div class="row text-center item-list">
+    <!-- 아이템  시작 -->
+<?php
+foreach ($result as $vo) {
+    ?>
         <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
           <div class="card h-100">
             <a href="goods-view.html"><img class="card-img-top" src="images/product1.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="goods-view.html">꽃다발</a>
+                <a href="goods-view.html"><?=$vo['p_name']?></a>
               </h4>
               <!-- 상품 내용 -->
               <p class="card-text">
-                3,8000원
+                <?= number_format($vo['p_price']) . "원"; ?>
               </p>
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-              <a href="goods-view.html"><img class="card-img-top" src="images/product1.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="goods-view.html">Project Two</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-              <a href="goods-view.html"><img class="card-img-top" src="images/product1.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="goods-view.html">Project Three</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-              <a href="goods-view.html"><img class="card-img-top" src="images/product1.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="goods-view.html">Project Four</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-              <a href="goods-view.html"><img class="card-img-top" src="images/product1.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="goods-view.html">Project Five</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-              <a href="goods-view.html"><img class="card-img-top" src="images/product1.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="goods-view.html">Project Six</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-              <a href="goods-view.html"><img class="card-img-top" src="images/product1.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="goods-view.html">Project Seven</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-              <a href="goods-view.html"><img class="card-img-top" src="images/product1.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="goods-view.html">Project Eight</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius adipisci dicta dignissimos neque animi ea, veritatis, provident hic consequatur ut esse! Commodi ea consequatur accusantium, beatae qui deserunt tenetur ipsa.</p>
-            </div>
-          </div>
-        </div>
+        <!-- 아이템 종료 -->
+        <?php
+}
+?>
       </div>
+      <!-- 상품리스트 끝 -->
 
   </article>
 
@@ -215,6 +150,60 @@
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+    $(document).ready(function () {
+      
+      $(".category").on("click", "li.nav-item",function (e) {
+        e.preventDefault();
+        $cno = $(this).data("cno");
+        $perPageNum = 8;
+        $order = "pno";
+        $sort = "DESC";
+        var data = {cno:$cno, perPageNum:$perPageNum, order:$order, sort:$sort};
+        console.log(data);
+        $.get("include/handlers/ajax-handler.php", data,
+          function (data, textStatus, jqXHR) {
+            var list = JSON.parse(data);
+            printHtml($(".item-list"), $("#entry-template"), list);
+          },
+          "text"
+        );
+
+      });
+
+
+    });
+    
+    function printHtml($target, $template, data){
+
+      var template = Handlebars.compile($template.html());
+      var html = template(data);
+      $target.html(html);
+    }
+    
+    
+    
+    </script>
+<script id="entry-template" type="text/x-handlebars-template">
+{{#each .}}
+<div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="goods-view.html"><img class="card-img-top" src="{{f_url}}" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="goods-view.html">{{p_name}}</a>
+              </h4>
+              <!-- 상품 내용 -->
+              <p class="card-text">
+                {{p_price}}원
+              </p>
+            </div>
+          </div>
+        </div>
+
+{{/each}}
+</script>
+
 
   </body>
 

@@ -101,7 +101,7 @@ $privacy = $result['1']['agr_cont'];
                     <div class="terms-view">
                         <p>
                             <input type="checkbox" class="terms" name="" id="terms-use">
-                            <label for=""><span><strong>(필수)</strong></span>&nbsp;이용약관</label>
+                            <label for="terms-use"><span><strong>(필수)</strong></span>&nbsp;이용약관</label>
                             <a href="#">전체보기</a>
                         </p>
                         <!-- 표준약관 -->
@@ -113,7 +113,7 @@ $privacy = $result['1']['agr_cont'];
                     <div class="terms-view">
                         <p>
                             <input type="checkbox" class="terms" name="" id="terms-privacy">
-                            <label for="">
+                            <label for="terms-privacy">
                                 <span><strong>(필수)</strong></span>
                                 개인정보 수집및이용
                             </label>
