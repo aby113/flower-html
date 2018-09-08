@@ -3,6 +3,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js"></script>
     <header>
 
         <!-- Navigation -->
@@ -12,7 +13,7 @@ if (!isset($_SESSION)) {
                     <li><a href="">고객센터</a></li>
                     <li><a href="cart.html">장바구니</a></li>
                     <li><a href="">마이페이지</a></li>
-                    <li><a href="joi    n-agreement.php">회원가입</a></li>
+                    <li><a href="join-agreement.php">회원가입</a></li>
                     <li>
 <?php
 if(empty($_SESSION["login"])){
@@ -35,15 +36,15 @@ if(empty($_SESSION["login"])){
             <div class="top-service">
                 <div class="container">
                     <ul>
-                        <li><a href="goods-list.html">꽃바구니</a></li>
-                        <li><a href="goods-list.html">근조화환</a></li>
-                        <li><a href="goods-list.html">관엽/화분</a></li>
-                        <li><a href="goods-list.html">동양란</a></li>
-                        <li><a href="goods-list.html">축하화환</a></li>
-                        <li><a href="goods-list.html">서양란</a></li>
-                        <li><a href="goods-list.html">꽃다발/꽃상자</a></li>
-                        <li><a href="goods-list.html">공기정화식물</a></li>
-                        <li><a href="goods-list.html">분재</a></li>
+                        <li><a href="1">꽃바구니</a></li>
+                        <li><a href="2">근조화환</a></li>
+                        <li><a href="3">관엽/화분</a></li>
+                        <li><a href="4">동양란</a></li>
+                        <li><a href="5">축하화환</a></li>
+                        <li><a href="6">서양란</a></li>
+                        <li><a href="7">꽃다발/꽃상자</a></li>
+                        <li><a href="8">공기정화식물</a></li>
+                        <li><a href="9">분재</a></li>
                     </ul>
                 </div>
 
@@ -68,7 +69,16 @@ if(empty($_SESSION["login"])){
             });
         });
 
+        $(".top-service a").click(function (e) { 
+            e.preventDefault();
+            var cno = $(this).attr("href");
+            var perPageNum = 8;
+            var order = "pno";
+            var sort = "DESC";
+            location.href = "goods-list.php?cno="+cno+"&perPageNum="+perPageNum+"&order="+order+"&sort="+sort;
 
+            
+        });
 
     });
     
