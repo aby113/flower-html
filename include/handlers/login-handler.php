@@ -8,7 +8,7 @@ if (isset($_POST["loginBtn"])) {
     $pw = Utils::sanitizeInp($_POST["pw"]);
     $result = $account->login($id, $pw);
     if($result){
-        Utils::redirect("index.php");
+        Utils::redirect("/index.php");
     }
 }
 

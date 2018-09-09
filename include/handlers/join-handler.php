@@ -15,7 +15,7 @@ if(isset($_POST["joinBtn"])){
    $wasSuccess = $account->register($member); 
 
    if($wasSuccess){
-        header("Location:index.php");
+        header("Location:/index.php");
    }
 }
 

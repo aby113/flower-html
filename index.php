@@ -16,8 +16,8 @@ include "include/handlers/index-handler.php";
     <link rel="shortcut icon" type="image⁄x-icon" href="images/title-logo.png">
 
     <title>꽃잎마을</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/handlebars/handlebars.js"></script>
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -36,7 +36,7 @@ include "include/handlers/index-handler.php";
 
   <body>
   <?php
-  include "header.php";
+  include "view/header.php";
   ?>
 <section>
 
@@ -114,10 +114,10 @@ foreach ($result as $vo) {
     ?>
         <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <a href="goods-view.html"><img class="card-img-top" src="images/product1.jpg" alt=""></a>
+            <a href="<?=$vo['pno']?>"><img class="card-img-top" src="images/product1.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="goods-view.html"><?=$vo['p_name']?></a>
+                <a href="<?=$vo['pno']?>"><?=$vo['p_name']?></a>
               </h4>
               <!-- 상품 내용 -->
               <p class="card-text">
@@ -174,6 +174,14 @@ foreach ($result as $vo) {
 
     });
     
+    $(".portfolio-item").on("click", "a", function (e) {
+       e.preventDefault();
+       var pno = $(this).attr("href");
+       location.href = 'view/goods-view.php?pno='+pno;
+
+    });
+
+
     function printHtml($target, $template, data){
 
       var template = Handlebars.compile($template.html());
@@ -188,10 +196,10 @@ foreach ($result as $vo) {
 {{#each .}}
 <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <a href="goods-view.html"><img class="card-img-top" src="{{f_url}}" alt=""></a>
+            <a href="{{pno}}"><img class="card-img-top" src="{{f_url}}" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="goods-view.html">{{p_name}}</a>
+                <a href="{{pno}}">{{p_name}}</a>
               </h4>
               <!-- 상품 내용 -->
               <p class="card-text">

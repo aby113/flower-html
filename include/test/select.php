@@ -18,6 +18,7 @@ $stmt->bindParam(":perPageNum", $perPageNum, PDO::PARAM_INT);
 //$stmt->bindParam(":sort", $sort, PDO::PARAM_STR);
 $stmt->execute();
 $result = $stmt->fetchAll();
+
 foreach($result as $vo){
     var_dump($vo);
 }

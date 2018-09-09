@@ -3,7 +3,6 @@ if (!isset($_SESSION)) {
     session_start();
 }
 ?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js"></script>
     <header>
 
         <!-- Navigation -->
@@ -11,9 +10,9 @@ if (!isset($_SESSION)) {
             <div class="top-link-wrap">
                 <ul class="top-link">
                     <li><a href="">고객센터</a></li>
-                    <li><a href="cart.html">장바구니</a></li>
+                    <li><a href="/view/cart.html">장바구니</a></li>
                     <li><a href="">마이페이지</a></li>
-                    <li><a href="join-agreement.php">회원가입</a></li>
+                    <li><a href="/view/join-agreement.php">회원가입</a></li>
                     <li>
 <?php
 if(empty($_SESSION["login"])){
@@ -28,7 +27,7 @@ if(empty($_SESSION["login"])){
             <div class="container text-center">
                 <h1>
                    <a href="/">
-                             <img src="images/logo.png" alt="">
+                             <img src="../images/logo.png" alt="">
                     </a>
                 </h1>
 
@@ -75,7 +74,7 @@ if(empty($_SESSION["login"])){
             var perPageNum = 8;
             var order = "pno";
             var sort = "DESC";
-            location.href = "goods-list.php?cno="+cno+"&perPageNum="+perPageNum+"&order="+order+"&sort="+sort;
+            location.href = "/view/goods-list.php?cno="+cno+"&perPageNum="+perPageNum+"&order="+order+"&sort="+sort;
 
             
         });

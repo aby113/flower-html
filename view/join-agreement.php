@@ -1,5 +1,5 @@
 <?php
-include "include/handlers/agree-handler.php";
+include "../include/handlers/agree-handler.php";
 $agr_use = $result['0']['agr_cont'];
 $privacy = $result['1']['agr_cont'];
 
@@ -16,19 +16,17 @@ $privacy = $result['1']['agr_cont'];
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" type="image⁄x-icon" href="images/title-logo.png">
-    <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/handlebars/handlebars.js"></script>
     <title>꽃잎마을</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/business-frontpage.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/join-agreement.css">
+    <link href="../css/business-frontpage.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/join-agreement.css">
     <style>
    
     
@@ -36,43 +34,9 @@ $privacy = $result['1']['agr_cont'];
 </head>
 
 <body>
-    <header>
-
-        <!-- Navigation -->
-        <nav class="head-wrap">
-            <div class="top-link-wrap">
-                <ul class="top-link">
-                    <li><a href="">로그인</a></li>
-                    <li><a href="">회원가입</a></li>
-                    <li><a href="">마이페이지</a></li>
-                    <li><a href="">장바구니</a></li>
-                    <li><a href="">고객센터</a></li>
-                </ul>
-            </div>
-            <div class="container text-center">
-                <h1>
-                    <img src="images/logo.png" alt="">
-                </h1>
-
-            </div>
-            <div class="top-service">
-                <div class="container">
-                    <ul>
-                        <li><a href="#">꽃바구니</a></li>
-                        <li><a href="#">근조화환</a></li>
-                        <li><a href="#">관엽/화분</a></li>
-                        <li><a href="#">동양란</a></li>
-                        <li><a href="#">축하화환</a></li>
-                        <li><a href="#">서양란</a></li>
-                        <li><a href="#">꽃다발/꽃상자</a></li>
-                        <li><a href="#">공기정화식물</a></li>
-                        <li><a href="#">분재</a></li>
-                    </ul>
-                </div>
-
-            </div>
-        </nav>
-    </header>
+    <?php
+    include "header.php";
+    ?>
     <!-- 헤더끝 -->
     <section class="container">
         <header>

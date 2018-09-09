@@ -1,9 +1,9 @@
 <?php
-include "include/config.php";
-include "include/classes/Utils.php";
-include "include/classes/Constants.php";
-include "include/classes/Account.php";
-include "include/handlers/login-handler.php";
+include "../include/config.php";
+include "../include/classes/Utils.php";
+include "../include/classes/Constants.php";
+include "../include/classes/Account.php";
+include "../include/handlers/login-handler.php";
 ?>
 
 <!DOCTYPE html>
@@ -15,19 +15,19 @@ include "include/handlers/login-handler.php";
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" type="image⁄x-icon" href="images/title-logo.png">
+    <link rel="shortcut icon" type="image⁄x-icon" href="../images/title-logo.png">
 
     <title>꽃잎마을</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/business-frontpage.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/login.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
+    <link href="../css/business-frontpage.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/handlebars/handlebars.js"></script>
 </head>
 
 <body>

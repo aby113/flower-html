@@ -1,8 +1,8 @@
 <?php
-include "include/config.php";
-include "include/classes/Constants.php";
-include "include/classes/Account.php";
-include "include/handlers/join-handler.php";
+include "../include/config.php";
+include "../include/classes/Constants.php";
+include "../include/classes/Account.php";
+include "../include/handlers/join-handler.php";
 
 ?>
 
@@ -15,19 +15,19 @@ include "include/handlers/join-handler.php";
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" type="image⁄x-icon" href="images/title-logo.png">
+    <link rel="shortcut icon" type="image⁄x-icon" href="../images/title-logo.png">
 
     <title>꽃잎마을</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/business-frontpage.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/join.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
+    <link href="../css/business-frontpage.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/join.css">
+    <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/handlebars/handlebars.js"></script>
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 </head>
 
@@ -57,14 +57,14 @@ include "include/handlers/join-handler.php";
             <div class="body">
                 <div class="title">
                     <h3>기본정보</h3>
-                    <p><img src="images/squre-red.png" alt=""> 표시는 반드시 입력하셔야 하는 항목입니다.</p>
+                    <p><img src="../images/squre-red.png" alt=""> 표시는 반드시 입력하셔야 하는 항목입니다.</p>
 
                 </div>
                 <form action="<?=$_SERVER['PHP_SELF']?>" method="post">
                     <input type="hidden" name="email" id="email" value="">
                     <table>
                         <tr>
-                            <th><img src="images/squre-red.png" alt=""> 아이디</th>
+                            <th><img src="../images/squre-red.png" alt=""> 아이디</th>
                             <td class="required">
                                 <input type="text" name="id" id="" placeholder="※ 영문자, 숫자, _ 만 입력 가능. 최소 3자이상 입력하세요."
                                    value="<?=rememberInpVal('id')?>" required>
@@ -73,14 +73,14 @@ include "include/handlers/join-handler.php";
                             </td>
                         </tr>
                         <tr>
-                            <th><img src="images/squre-red.png" alt="">비밀번호</th>
+                            <th><img src="../images/squre-red.png" alt="">비밀번호</th>
                             <td class="required">
                                 <input type="text" name="pw" id="" value="<?=rememberInpVal('pw')?>" required placeholder="5이상 30자 이하로 입력해주세요.">
                                 <?=$account->getError(Constants::$passwordCharacters)?>
                             </td>
                         </tr>
                         <tr>
-                            <th><img src="images/squre-red.png" alt="">비밀번호확인</th>
+                            <th><img src="../images/squre-red.png" alt="">비밀번호확인</th>
                             <td class="required">
                                 <input type="text" name="pwConfirm" id="" value="<?=rememberInpVal('pwConfirm')?>" required>
                                 <?=$account->getError(Constants::$passwordsDoNoMatch)?>
