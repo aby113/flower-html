@@ -1,16 +1,12 @@
 <?php
 
 $prodDAO = new ProductDAO($con);
-$cri = new Criteria();
+
 if(isset($_GET["cno"])){
     // 만약 sort가 null 이면 내림차순으로 초기화
-    $list = $prodDAO->getProductList($_GET["cno"], $_GET["perPageNum"], $_GET["order"], $_GET["sort"]);
+    $list = $prodDAO->getProductList($_GET["cno"], 8, 'pno', 'desc');
     $prodCnt = count($list);
 }
-
-
-
-
 
 function isSelected($order){
 
