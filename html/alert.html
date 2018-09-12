@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vendor/jquery/jquery.js"></script>
+    <style>
+body{
+    height: 2000px;
+}
+
+ .alert{
+     display: none;
+     position: fixed;
+     left:500px;
+     background-color: black;
+    padding:10px 50px 10px 20px;    
+ }   
+    
+.msg{
+    text-align: center;
+    color: green;
+}
+a{
+    color: white;
+    text-decoration: none;
+}
+
+button{
+    margin-top: 100px;
+}
+    </style>
+</head>
+<body>
+    
+    <h1>연습</h1>
+    <span class="alert">
+       <img src="../images/check-mark.png" alt=""> <span class="msg">카트에 담았습니다. <a href="#"><strong>카트보기&nbsp;&gt;&gt;</strong></a> </span>
+    </span>
+    
+    <button>장바구니 추가</button>
+
+<script>
+$(document).ready(function () {
+    $("button").click(function(){
+        $(".alert").fadeIn("slow");
+        setTimeout(function(){
+            $(".alert").fadeOut("slow");
+        }, 3000);
+          
+    });
+});
+
+</script>
+</body>
+</html>

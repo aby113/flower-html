@@ -174,7 +174,8 @@ foreach ($result as $vo) {
 
     });
     
-    $(".portfolio-item").on("click", "a", function (e) {
+    // 카테고리 상품링크 클릭(상세보기이동)
+    $(".item-list").on("click", "a", function (e) {
        e.preventDefault();
        var pno = $(this).attr("href");
        location.href = 'view/goods-view.php?pno='+pno;

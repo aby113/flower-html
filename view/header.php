@@ -10,13 +10,13 @@ if (!isset($_SESSION)) {
             <div class="top-link-wrap">
                 <ul class="top-link">
                     <li><a href="">고객센터</a></li>
-                    <li><a href="/view/cart.html">장바구니</a></li>
+                    <li><a href="/view/cart.php">장바구니</a></li>
                     <li><a href="">마이페이지</a></li>
                     <li><a href="/view/join-agreement.php">회원가입</a></li>
                     <li>
 <?php
 if(empty($_SESSION["login"])){
-    echo "<a href='login.php'>로그인</a>";
+    echo "<a href='/view/login.php'>로그인</a>";
 }else{
     echo "<a class='logout' href='#'>로그아웃</a>";
 }
@@ -59,7 +59,7 @@ if(empty($_SESSION["login"])){
             if(!result)return;
             $.ajax({
                 type: "post",
-                url: "login.php",
+                url: "/view/login.php",
                 data: {logout:"true"},
                 dataType: "text",
                 success: function (response) {

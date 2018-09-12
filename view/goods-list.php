@@ -3,7 +3,9 @@ include "../include/config.php";
 include "../include/classes/Criteria.php";
 include "../include/classes/Constants.php";
 include "../include/classes/ProductDAO.php";
+include "../include/classes/Utils.php";
 include "../include/handlers/goods-handler.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -45,12 +47,12 @@ include "header.php";
       <hr class="line">
       <div>
         <ul class="order-list">
-          <li><img src="../images/check.png" alt=""> <a class="" data-sort="<?=$_GET["sort"]?>" href="#">추천순</a></li>
-          <li><a class="" data-sort="<?=$_GET["sort"]?>" href="#">판매순</a></li>
+          <li><img src="../images/check.png" alt=""> <a class="" data-sort="<?= Utils::getParam('sort') ?>" href="#">추천순</a></li>
+          <li><a class="" data-sort="<?= Utils::getParam('sort') ?>" href="#">판매순</a></li>
           <li><a class="low_price" data-sort="ASC" href="p_price">낮은가격순</a></li>
           <li><a class="high_price" data-sort="DESC" href="p_price">높은가격순</a></li>
-          <li><a class="" data-sort="<?=$_GET["sort"]?>" href="">상품평순</a></li>
-          <li><a class="selected" data-sort="<?=$_GET["sort"]?>"
+          <li><a class="" data-sort="<?= Utils::getParam('sort') ?>" href="">상품평순</a></li>
+          <li><a class="selected" data-sort="<?= Utils::getParam('sort') ?>"
               href="pno">등록일순</a>
           </li>
         </ul>

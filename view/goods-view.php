@@ -19,7 +19,7 @@ include "../include/handlers/view-handler.php";
 
     <title>꽃잎마을</title>
     <script src="../vendor/jquery/jquery.min.js"></script>
-  <script src="../vendor/handlebars/handlebars.js"></script>
+    <script src="../vendor/handlebars/handlebars.js"></script>
     <!-- Bootstrap core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -27,34 +27,43 @@ include "../include/handlers/view-handler.php";
     <link href="../css/business-frontpage.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/goods-view.css">
-    
+
 </head>
 
 <body>
-   <?php
+    <?php
    include "header.php";
    ?>
     <!-- 헤더끝 -->
     <section class="container">
         <header>
-            <span>홈><?=$vo['c_name']?></span>
+            <span>홈>
+                <?=$vo['c_name']?></span>
         </header>
         <article>
+            <span class="alert">
+                <img src="../images/check-mark.png" alt=""> <span class="msg">카트에 담았습니다. <a class="goCart" href="#"><strong>카트보기&nbsp;&gt;&gt;</strong></a>
+                </span>
+            </span>
             <div class="left-box">
                 <img src="../images/product2.jpg" alt="">
             </div>
             <div class="right-box">
-                <h4><?=$vo['p_name']?></h4>
+                <h4>
+                    <?=$vo['p_name']?>
+                </h4>
                 <ul class="item">
                     <li>
                         <strong>짧은설명</strong>
                         <div>꽃가게 최적 꽃잎마을</div>
                     </li>
                     <li> <strong>소비자가</strong>
-                        <div><?=number_format($vo['p_price'])?>원</div>
+                        <div>
+                            <?=number_format($vo['p_price'])?>원</div>
                     </li>
                     <li> <strong>판매가</strong>
-                        <div class="price"><?=number_format($vo['p_price'])?>원</div>
+                        <div class="price">
+                            <?=number_format($vo['p_price'])?>원</div>
                     </li>
                     <li> <strong>배송비</strong>
                         <div>2,500</div>
@@ -67,16 +76,17 @@ include "../include/handlers/view-handler.php";
                     </li>
                 </ul>
                 <div class="amount-box">
-                    <strong><?=$vo['p_name']?></strong>
+                    <strong>
+                        <?=$vo['p_name']?></strong>
                     <span class="count">
                         <input type="text" class="goods-cnt" title="수량" data-key="0" name="goodsCnt[]" value="1"
                             data-value="1" data-stock="0">
                         <span class="count-area">
-                           <a class="upBtn" href="#">
-                               <img src="../images/up-btn.png" alt="">
-                           </a> 
-                           <a class="downBtn" href="#">
-                               <img src="../images/downBtn.png" alt="">
+                            <a class="upBtn" href="#">
+                                <img src="../images/up-btn.png" alt="">
+                            </a>
+                            <a class="downBtn" href="#">
+                                <img src="../images/downBtn.png" alt="">
                             </a>
                         </span>
                     </span>
@@ -85,13 +95,15 @@ include "../include/handlers/view-handler.php";
 
                     <div class="space"></div>
                     <div class="price-right">
-                        <div><span>총 상품금액</span><strong class="goods-amount"><?=number_format($vo['p_price'])?>원</strong></div>
-                        <div><span id="amount">총 합계금액</span><strong class="total-amount"><?=number_format($vo['p_price'])?>원</strong></div>
+                        <div><span>총 상품금액</span><strong class="goods-amount">
+                                <?=number_format($vo['p_price'])?>원</strong></div>
+                        <div><span id="amount">총 합계금액</span><strong class="total-amount">
+                                <?=number_format($vo['p_price'])?>원</strong></div>
                     </div>
                 </div>
                 <div class="btngroup">
                     <button class="btn btn-danger">구매하기</button>
-                    <button class="btn btn-success">장바구니</button>
+                    <button class="btn btn-success addCart-btn">장바구니</button>
                     <button class="btn btn-primary">관심상품</button>
                 </div>
             </div>
@@ -114,61 +126,102 @@ include "../include/handlers/view-handler.php";
 
     </section>
     <script>
-    $(document).ready(function () {
-
         var price = "<?=$vo['p_price']?>";
-        // 상품 수량 텍스트
-        var $goodsInp = $(".goods-cnt");
-        var $goodsAmt = $(".goods-amount");
-        var $totalAmt = $(".total-amount");
+        var pno = "<?= $vo['pno'] ?>";
+        var vo = '<?= json_encode($vo)?>';
+        $(document).ready(function () {
 
-// 입력값 검증후 -> 계산 -> 텍스트 변경처리
-        $(".upBtn").click(function (e) { 
-            e.preventDefault();
-            var amount = $goodsInp.val();
-            $goodsInp.val(++amount);
-            $goodsInp.trigger("change");
-           
+
+
+            // 상품 수량 텍스트
+            var $goodsInp = $(".goods-cnt");
+            var $goodsAmt = $(".goods-amount");
+            var $totalAmt = $(".total-amount");
+
+            // 입력값 검증후 -> 계산 -> 텍스트 변경처리
+            $(".upBtn").click(function (e) {
+                e.preventDefault();
+                var amount = $goodsInp.val();
+                $goodsInp.val(++amount);
+                $goodsInp.trigger("change");
+
+            });
+
+            $(".downBtn").click(function (e) {
+                e.preventDefault();
+                var amount = $goodsInp.val();
+                $goodsInp.val(--amount);
+                $goodsInp.trigger("change");
+            });
+
+            // 입력 텍스트값이 변경할때 일어나는 이벤트
+            $goodsInp.change(function (e) {
+                e.preventDefault();
+                var amt = $goodsInp.val();
+                var totalCnt = 0;
+                amt = validAmt(amt);
+                totalCnt = calc(amt);
+                changeText(amt, totalCnt);
+            });
+
+            // 장바구니 상품 추가 
+            $(".addCart-btn").click(function (e) {
+                e.preventDefault();
+                var amount = $(".goods-cnt").val();
+                var data = JSON.parse(vo);
+                data.amount = amount;
+                $.ajax({
+                    type: "post",
+                    url: "../include/handlers/ajax-handler.php",
+                    data: JSON.stringify({
+                        data: data,
+                        addCart: true
+                    }),
+                    dataType: "text",
+                    success: function (response) {
+                        fadeEvent($(".alert"));
+
+                    }
+
+                });
+
+            });
+
+            // 장바구니 이동
+            $(".goCart").click(function (e) {
+                e.preventDefault();
+                location.href="cart.php";
+            });
+
+            // 메세지가 나타나고 3초뒤에 사라짐
+            function fadeEvent($target) {
+                $target.fadeIn("slow");
+                setTimeout(function () {
+                    $target.fadeOut("slow");
+                }, 3000);
+            }
+
+            function validAmt(amount) {
+                if (amount < 1) amount = 1;
+                if (amount > 999) amount = 999;
+                return amount;
+            }
+
+            function calc(amount) {
+                if (amount < 1) amount = 1;
+                if (amount > 999) amount = 999;
+                return price * amount;
+            }
+
+
+
+            function changeText(amount, totalVal) {
+                $goodsInp.val(amount);
+                $totalAmt.text(totalVal + "원");
+                $goodsAmt.text(totalVal + "원");
+            }
+
+
+
         });
-
-        $(".downBtn").click(function (e) { 
-            e.preventDefault();
-            var amount = $goodsInp.val();
-            $goodsInp.val(--amount);
-            $goodsInp.trigger("change");
-        });
-
-        $goodsInp.change(function (e) { 
-            e.preventDefault();
-            var amt = $goodsInp.val();
-            var totalCnt = 0;
-            amt = validAmt(amt);
-            totalCnt = calc(amt);
-            changeText(amt, totalCnt);
-        });
-
-
-
-        function validAmt(amount){
-            if(amount < 1)amount = 1;
-            if(amount > 999)amount = 999;
-            return amount;
-        }
-
-        function calc(amount){
-            if(amount < 1)amount = 1;
-            if(amount > 999)amount = 999;
-            return price * amount;
-        }
-
-
-
-        function changeText(amount, totalVal){
-            $goodsInp.val(amount);
-            $totalAmt.text(totalVal+"원");
-            $goodsAmt.text(totalVal+"원");
-        }
-    });
-    
-    
     </script>

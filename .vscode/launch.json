@@ -5,6 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "node",
+            "request": "launch",
+            "name": "jsProgram",
+            "program": "${file}",
+            "cwd":"${fileDirname}",
+            "port":9229,
+            "outFiles": [
+                
+            ]
+        },
+      
+        {
             "name": "Listen for XDebug",
             "type": "php",
             "request": "launch",

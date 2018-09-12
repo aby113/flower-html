@@ -139,3 +139,44 @@ table+a{
 .btn-group > .right-box{
     margin-left: 593px;
 }
+
+
+/* 상품 수량조절  */
+/* 수량텍스트 */
+.count{
+    position: relative;
+    left: 20px;
+}
+
+.count-area{
+    position: relative;
+    bottom: 2px;
+}
+
+.count > *{
+    float: left;
+}
+
+input.goods-cnt{
+    padding-left: 15px;
+    width: 40px;
+    height: 32px;
+}
+
+.count-area > a{
+    
+    display: block;
+    height: 18px;
+}
+
+.downBtn{
+    position: relative;
+    bottom: 3px;
+}
+
+/* 수량조절끝 */
+span.total-price{
+    position: relative;
+    top: 3px;
+    left: 2px;
+}
