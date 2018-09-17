@@ -11,9 +11,8 @@ class ProductDAO
 
     public function getProductList($cno, $perPageNum, $order, $sort)
     {
-        $sql = "SELECT p.*, f.f_url FROM product p, category c, file f
-                     WHERE p.cno = :cno AND p.cno = c.cno AND p.pno = f.pno
-                    GROUP BY pno
+        $sql = "SELECT p.* FROM product p, category c
+                     WHERE p.cno = :cno AND p.cno = c.cno
                     ORDER BY {$order} {$sort}
                     LIMIT :perPageNum";
 
@@ -27,10 +26,9 @@ class ProductDAO
     public function getProduct($pno)
     {
         $sql = "
-            SELECT p.*, f.f_url, c.c_name FROM product p, file f, category c
+            SELECT p.*, c.c_name FROM product p, category c
             WHERE
-	        	p.pno = f.pno
-	        AND
+	        	
 	        	p.cno = c.cno
         	AND
  	        	p.pno = ?

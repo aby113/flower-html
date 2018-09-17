@@ -65,10 +65,10 @@ class Cart
     {
         $sql = "
                 INSERT INTO cart(mno, pno, amount)
-                VALUES (?, ?, 1);
+                VALUES (?, ?, ?);
                 ";
         $stmt=$this->getPrePare($sql);
-        $stmt->execute(array($mno, $pno));
+        $stmt->execute(array($mno, $pno, $amount));
     }
 
     // 카트에 물품 존재 여부

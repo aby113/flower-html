@@ -65,97 +65,18 @@ include "../include/handlers/cart-handler.php";
                     </thead>
                     <tbody>
                         <!-- 아이템리스트 시작 -->
-<?php
-if (!empty($items)) {
-    $first = 0;
-    foreach ($items as $vo) {
-        $first++;
-        // 상품 총 갯수 와 총 합계를 구함
-        $totalCnt += $vo['totalcnt'];
-        $prodCnt += $vo['amount'];
-        ?>
-                        <tr>
-                            <td rowspan="2" class="ta-c cb-array">
-                                <span class="form-element">
-                                    <input type="checkbox" name="cart_no[]" id="checkbox" value="<?=$vo['cart_no'] ?>" class="checkbox"
-                                        checked="checked" data-price="<?=$vo['p_price'] ?>" data-totalcnt="<?=$vo['totalcnt'] ?>" data-amount="<?=$vo['amount'] ?>">
-                                    <label for="checkbox" class="check-s on">선택</label>
-                                </span>
-                            </td>
-                            <td class="gi this-product">
-                                <span><a class="viewLink" href="<?=$vo['pno']?>"><img src="<?=$vo['p_url']?>" width="40" alt="디자인교과서 쇼핑몰디자인"
-                                            title="디자인교과서 쇼핑몰디자인" class="middle"></a></span>
-                                <div>
-                                    <div id="coupon_apply_14">
-                                        <a href="../#couponApplyLayer" class="btn-open-layer" data-cartsno="14"><img
-                                                src="../images/coupon-apply.png" alt="쿠폰적용"></a>
-                                    </div>
-                                    <a class="viewLink" href="<?=$vo['pno']?>"><?=$vo['p_name']?></a>
-
-                                </div>
-                            </td>
-                            <td class="ta-c count this-product">
-                                <span class="count">
-                                    <input type="text" class="goods-cnt" title="수량" data-price="<?=$vo['p_price'] ?>" name="amount[]"
-                                        value="<?=$vo['amount']?>" data-value="1" data-stock="0">
-                                    <span class="count-area">
-                                        <a class="upBtn" href="#">
-                                            <img src="../images/up-btn.png" alt="">
-                                        </a>
-                                        <a class="downBtn" href="#">
-                                            <img src="../images/downBtn.png" alt="">
-                                        </a>
-                                    </span>
-                                </span>
-                            </td>
-                            <td class="ta-c this-product">
-                                <strong class="price"><?=numberFormat($vo['totalcnt'])?>원</strong>
-                            </td>
-                            <td rowspan="2" class="benefits">
-
-                            </td>
-                            <td rowspan="2" class="ta-c">
-                                <strong class="price"><?=numberFormat($vo['totalcnt'])?>원</strong>
-                            </td>
-                            <td rowspan="4" class="ta-c">
-<?php
-if ($first === 1) { // 1일때만 배송비안내
-?>
-                                <span class="c-gray">
-                                    기본 - 금액별배송비<br>
-                                    0원
-                                </span>
-<?php
-}
-?>
-                            </td>
-                        </tr>
-                        <tr class="op">
-                            <td colspan="3">
-                                <div>
-                                </div>
-                            </td>
-                        </tr>
+                      
                         <!-- 아이템 리스트 끝 -->
-<?php
-    }
-}else{
-    echo "<tr>
-                 <td colspan='8' class='no-data'>
-                  장바구니에 담겨있는 상품이 없습니다.
-                </td>
-         </tr>";
-}
-?>
+
                   </tbody>
 
                 </table>
                 <a href="">&lt;쇼핑계속하기</a>
                 <div class="price-box">
                     <p>
-                        <span class="detail">총 <strong><?=issetParam($prodCnt)?></strong>개의 상품금액
+                        <span class="detail">총 <strong></strong>개의 상품금액
                             <strong>
-                                <?=numberFormat($totalCnt);?>원
+                                원
                             </strong>
                         </span>
                         <span class="deliveryCalc">
@@ -164,7 +85,7 @@ if ($first === 1) { // 1일때만 배송비안내
                         </span>
                         <span class="total-price">
                             <img src="../images/total.png" alt="">
-                            <span><?=numberFormat($totalCnt);?></span>원
+                            <span></span>원
                         </span>
                     </p>
                 </div>
@@ -191,10 +112,72 @@ if ($first === 1) { // 1일때만 배송비안내
 
     <script>
         var $frm = $(".cartFrm");
-        var reqURL = "<?=$_SERVER['PHP_SELF']?>";
+        var reqURL = "";
     </script>
-    <script src="../js/cart.js"></script>
+    <script src="../js/cart2.js"></script>
+    <script id="entry-template" type="text/x-handlebars-template">
+ {{#each .}}   
+ <tr>
+                            <td rowspan="2" class="ta-c cb-array">
+                                <span class="form-element">
+                                    <input type="checkbox" name="cart_no[]" id="checkbox" value="" class="checkbox"
+                                        checked="checked" data-pno="{{pno}}" data-price="{{p_price}}" data-totalcnt="{{totalCnt}}" data-amount="{{amount}}">
+                                    <label for="checkbox" class="check-s on">선택</label>
+                                </span>
+                            </td>
+                            <td class="gi this-product">
+                                <span><a class="viewLink" href="{{pno}}"><img src="{{p_url}}" width="40" alt="디자인교과서 쇼핑몰디자인"
+                                            title="디자인교과서 쇼핑몰디자인" class="middle"></a></span>
+                                <div>
+                                    <div id="coupon_apply_14">
+                                        <a href="../#couponApplyLayer" class="btn-open-layer" data-cartsno="14"><img
+                                                src="../images/coupon-apply.png" alt="쿠폰적용"></a>
+                                    </div>
+                                    <a class="viewLink" href="{{pno}}">{{p_name}}</a>
 
+                                </div>
+                            </td>
+                            <td class="ta-c count this-product">
+                                <span class="count">
+                                    <input type="text" class="goods-cnt" title="수량" data-price="{{p_price}}" name="amount[]"
+                                        value="{{amount}}" data-value="1" data-stock="0">
+                                    <span class="count-area">
+                                        <a class="upBtn" href="#">
+                                            <img src="../images/up-btn.png" alt="">
+                                        </a>
+                                        <a class="downBtn" href="#">
+                                            <img src="../images/downBtn.png" alt="">
+                                        </a>
+                                    </span>
+                                </span>
+                            </td>
+                            <td class="ta-c this-product">
+                                <strong class="price">{{totalCnt}}원</strong>
+                            </td>
+                            <td rowspan="2" class="benefits">
+
+                            </td>
+                            <td rowspan="2" class="ta-c">
+                                <strong class="price">{{totalCnt}}원</strong>
+                            </td>
+                            <td rowspan="4" class="ta-c">
+                            {{#if @first}}
+                                <span class="c-gray">
+                                    기본 - 금액별배송비<br>
+                                    0원
+                                </span>
+                            {{/if}}
+                            </td>
+                        </tr>
+                        <tr class="op">
+                            <td colspan="3">
+                                <div>
+                                </div>
+                            </td>
+                        </tr>
+    {{/each}}
+    </script>
+    
 </body>
 
 </html>

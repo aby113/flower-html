@@ -24,26 +24,41 @@ if (isset($_GET["cno"])) {
     if (isset($_SESSION["login"])) {
         $mno = $_SESSION["login"]['mno'];
         $cartDAO->addCart($mno, $data['pno'], $data['amount']);
+        echo "1";
         exit;
-    }else{ // 비회원인경우
-        
-        // if(isset($_COOKIE['cart'])){
-        //     // pno와 amount를 구한다 그런다음 기존 행을 찾는다 수량을 변경한다
-        //     $cart = json_decode($_COOKIE["cart"]['data'], true);
-        //     foreach($cart as $vo){
-        //         if($vo['pno'] === $param['pno']){
-        //             $vo['amount'] += $param['amount'];  
-        //         }
-        //     }
-        //     echo "존재함";
-        // }else{
-        //     unset($param['addCart']);
-        //     setCookie('cart', json_encode(array_push($param)), time() + 60 * 60 * 24 * 30);
-        //     echo "존재안함";
-        // }
-
-
+    }else{ // 비회원일 경우
+        echo "0";
+        exit;
     }
+
+
+
+
+    // }else{ // 비회원인경우
+    //      if(isset($_COOKIE['cart']) && $_COOKIE['cart'] !== "null"){
+    //          // pno와 amount를 구한다 그런다음 기존 행을 찾는다 수량을 변경한다
+
+    //          $cart = json_decode($_COOKIE["cart"], true);
+    //          $isNew = false;
+    //          foreach($cart as &$vo){
+                
+    //             if($param['data']['pno'] === $vo['pno']){
+    //                 $vo['amount'] += $param['data']['amount'];
+    //                 break;
+    //             }else{
+    //                 $isNew = true;
+    //             }
+    //          }
+    //          if($isNew)array_push($cart, $param['data']); 
+    //          setcookie('cart', json_encode($cart), time() + 60 * 60 * 24 * 30, "/", null,null,null);
+    //         }else{
+    //          unset($param['addCart']);
+    //          setcookie('cart', json_encode(array($param['data'])), time() + 60 * 60 * 24 * 30, "/", null, null,null);
+                
+    //         }
+
+
+    // }
  }
 
 

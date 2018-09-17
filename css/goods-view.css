@@ -209,6 +209,35 @@ a:hover{
     color: white;
 }
 
+.contents > .btn-group{
+    width: 800px;
+}
+
+h4{
+    padding-top: 23px;
+    padding-bottom: 3px;
+}
+
+
+.top-reviews h4, .top-qna h4{
+    display: inline-block;
+}
+
+.top-reviews button, .top-qna button{
+    margin-top: 23px;
+    float: right;
+}
+
+
+
+.contents ~ div{
+   width: 997px;
+}
+
+ul.pagination{
+    margin-left: 350px;
+}
+
 .clear{
     clear: both;
 }

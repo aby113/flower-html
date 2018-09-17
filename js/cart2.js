@@ -1,8 +1,15 @@
 $(document).ready(function () {
-
+  
+ 
     var amtObj = $(".detail > strong")[0];
     var totalObj = $(".detail > strong")[1];
     var $totalPrice = $(".total-price");
+ // 로컬에 담긴 장바구니 아이템 리스트
+    var items =  JSON.parse(localStorage.getItem("cart"));
+    printHtml($("tbody"), $("#entry-template"), items);
+    var cart = getCartInfo();
+    changeText(cart.totalAmt, cart.totalCnt);
+
     $(".orderBtn").click(function (e) {
         e.preventDefault();
         alert("클릭");
@@ -11,15 +18,56 @@ $(document).ready(function () {
     
     // 장바구니 아이템 삭제
     $(".delBtn").click(function (e) {
+        
         e.preventDefault();
         $result = confirm("해당 상품을 삭제 하시겠습니까?");
         if (!$result) return;
-        createHidden($frm, "delBtn");
-        $("input:checkbox:not(:checked, #allCheck)").removeAttr("name");
-        $frm.attr("action", reqURL);
-        $frm.attr("method", "post");
-        $frm.submit();
+        var $selectItems = $("input:checkbox:checked");
+        var items = JSON.parse(localStorage.getItem("cart"));
+        var i = 0;
+        // 삭제하기전에 pno 값들을 얻음
+        var pnoArr = getPno($selectItems);
+        // 값을 얻고 체크된 행을 삭제
+        rmElement();
+        // 로컬스토리지네 아이템 삭제
+        rmItem(items, pnoArr);
+        localStorage.setItem("cart", JSON.stringify(items));
+        // 체크된 아이템을 모두 삭제해서 종합텍스트를 0으로 셋팅
+        changeText(0, 0);
     });
+// 체크박스된 아이템 번호를 구해와서 카트내에 아이템과 일치하면 삭제
+    function rmItem(items, pnoArr){
+        for(const key in items){
+            var vo = items[key];
+            pnoArr.forEach(function(e){
+                console.log(typeof vo['pno']);
+                console.log(typeof e);
+                if(vo['pno'] == e){
+                   
+                    items.splice(key, 1);
+                }
+            });
+            
+        }
+    }
+
+    // 체크된 박스 기준으로 ui 삭제
+    function rmElement(){
+        $checkboxs = $("input:checkbox:checked").not("#allCheck");
+        $tr = $checkboxs.closest("tr");
+        $tr2 =$tr.next();
+        $tr.add($tr2).remove();
+    }
+
+    function getPno($selectItems){
+        var array = new Array();
+        $selectItems.each(function(){
+            array.push($(this).data("pno"));
+        });
+
+        return array;
+    }
+
 
     function createHidden($target, name) {
         $("<input type='hidden' value='true'>").attr("name", name).appendTo($target);
@@ -119,5 +167,11 @@ $(document).ready(function () {
         $(totalObj).text("" + totalcnt + "원");
         $totalPrice.html("<img src='../images/total.png' alt=''>&nbsp;" + totalcnt + "원");
 
+    }
+
+    function printHtml($target, $template, data){
+        var template = Handlebars.compile($template.html());
+        var html = template(data);
+        $target.html(html);
     }
 });
